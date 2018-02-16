@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>html5 video play seamless</title>
+		<meta name="author" content="Hideyuki Hira @samuraishockdo">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script>
+		 $(document).ready(function() {
+		     //mp4files for play
+		     var mp4Array = [
+			 "http://techslides.com/demos/sample-videos/small.mp4", 
+			 "http://techslides.com/demos/sample-videos/small.mp4"
+		     ];
+
+		     //target div for <video>
+		     var tgtDiv = '#VideoContainer';
+
+
+		     mp4Array.forEach(makeVideoTag);
+
+		     function makeVideoTag(val, index) {
+			 $('<video>').attr({
+			     id : 'video' + index,
+			     src : val,
+			     controls : true
+			 }).appendTo($(tgtDiv)).hide();
+
+			 if (index !== mp4Array.length - 1) {
+			     $(tgtDiv + ' #video' + index).on('ended', function(event) {
+				 $(this).hide();
+				 $(this).next().show();
+				 $(this).next()[0].play();
+			     });
+			 }
+		     }
+
+	  
+		     $(tgtDiv + ' video:eq(0)').show();
+
+		 });
+
+		</script>
+	</head>
+	<body>
+
+			<header>
+				<h1>html5 video play seamless</h1>
+			</header>
+
+
+
+
+				<!-- <video> are here  -->
+				<div id="VideoContainer"></div>
+
+	
+
+			<footer>
+			  <p>
+			    <a href="https://samuraishockdo.info/webmagazine/16-code/68-html5video2seamless.html">SamuraishockDO</a>
+			  </p>
+			</footer>
+		</div>
+
+	</body>
+</html>
